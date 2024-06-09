@@ -1,0 +1,15 @@
+local RunService = game:GetService("RunService")
+local BossGateInteractions = game.Workspace.Boss_Gate.Interactions
+local LocalPlayer = game.Players.LocalPlayer
+local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+RunService.RenderStepped:Connect(function()
+    game.Workspace.LobbyTeleport.Interaction.CFrame = hrp.CFrame
+    
+    for _, BossStarter in ipairs(BossGateInteractions:GetChildren()) do
+        if BossStarter.Name == "Bounds" then
+            BossStarter.CFrame = hrp.CFrame
+            BossStarter.CanCollide = false
+        end
+    end
+end)
