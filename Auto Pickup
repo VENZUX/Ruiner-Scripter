@@ -1,0 +1,19 @@
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+
+local function updateCoinsCFrame()
+    local hrp = Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    local coinsFolder = game.Workspace.Coins
+
+    if hrp and coinsFolder then
+        for _, Coins in ipairs(coinsFolder:GetChildren()) do
+            if Coins:IsA("BasePart") then
+                Coins.CFrame = hrp.CFrame * CFrame.new(0, -2.5, 0)
+                Coins.CanCollide = false
+                Coins.Anchored = true
+            end
+        end
+    end
+end
+
+RunService.Stepped:Connect(updateCoinsCFrame)
