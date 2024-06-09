@@ -1,0 +1,56 @@
+local Owner = {
+    548860564
+}
+
+local Leader = {
+    4402987
+}
+
+local Developer = {
+    14696452,
+    51645737,
+    155639345,
+    178724273,
+    46522586,
+    7492346,
+    792733,
+    17258879,
+    22306125,
+    18486567,
+    420124805,
+    7764425
+}
+
+local RedManta = {
+    83093519,
+    9569147,
+    5068683264,
+    94293669,
+    10594855,
+    31323231
+}
+
+local function checkUserId(userId)
+    for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+        if player.UserId == userId then
+            return true, player.Name
+        end
+    end
+    return false, nil
+end
+
+local function onHeartbeat()
+    local groupsToCheck = {Owner, Leader, Developer, RedManta}
+
+    for _, group in ipairs(groupsToCheck) do
+        for _, specificUserId in ipairs(group) do
+            local found, playerName = checkUserId(specificUserId)
+            if found then
+                game.Players.LocalPlayer:Kick(playerName .. " detected in your game so you got kicked!")
+                return
+            end
+        end
+    end
+end
+
+game:GetService("RunService").Heartbeat:Connect(onHeartbeat)
