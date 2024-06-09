@@ -1,0 +1,43 @@
+local player = game.Players.LocalPlayer
+local humanoidRootPart = player.Character.HumanoidRootPart
+local range = 100
+local cooldown = 0.3
+local lastAttackTime = 0
+
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local combatRemote = replicatedStorage:WaitForChild("Shared"):WaitForChild("Combat"):WaitForChild("Attack")
+
+local runService = game:GetService("RunService")
+local mobsFolder = game.Workspace.Mobs
+
+runService.Heartbeat:Connect(function()
+    local closestDistance = math.huge
+    local closestCollider = nil
+    
+    for _, mobModel in ipairs(mobsFolder:GetChildren()) do
+        local collider = mobModel:FindFirstChild("Collider")
+        if collider then
+            local distance = (collider.Position - humanoidRootPart.Position).magnitude
+            if distance < closestDistance and distance <= range then
+                local healthValue = mobModel:FindFirstChild("HealthProperties") and mobModel.HealthProperties:FindFirstChild("Health")
+                if not healthValue or (healthValue.Value > 0 and distance <= range) then
+                    closestDistance = distance
+                    closestCollider = collider
+                end
+            end
+        end
+    end
+    
+    if closestCollider then
+        local mobModel = closestCollider.Parent
+        local healthValue = mobModel:FindFirstChild("HealthProperties") and mobModel.HealthProperties:FindFirstChild("Health")
+        if healthValue and healthValue.Value > 0 and (tick() - lastAttackTime) >= cooldown then
+            local args = {
+                "IcefireMage1",
+                closestCollider.Position
+            }
+            combatRemote:FireServer(unpack(args))
+            lastAttackTime = tick()
+        end
+    end
+end)
