@@ -1,0 +1,116 @@
+    local player = game.Players.LocalPlayer
+    if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        local hrp = player.Character.HumanoidRootPart
+        
+        -- Find the objects in the game world
+        local missionStartCollider = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("MissionStart") and game.Workspace.MissionObjects.MissionStart:FindFirstChild("Collider")
+        local caveTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("CaveTrigger")
+        local cabbage1 = game.Workspace:FindFirstChild("Cabbages") and game.Workspace.Cabbages:FindFirstChild("1") and game.Workspace.Cabbages["1"]:FindFirstChild("Main")
+        local cabbage2 = game.Workspace:FindFirstChild("Cabbages") and game.Workspace.Cabbages:FindFirstChild("2") and game.Workspace.Cabbages["2"]:FindFirstChild("Main")
+        local bridgeTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("BridgeTrigger")
+        local bossIntroTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("BossIntroTrigger")
+        local townTalkPart = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("TownTalkPart")
+        local boulderTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("BoulderTrigger")
+        local boulderStopTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("BoulderStopTrigger")
+        local cage1 = game.Workspace:FindFirstChild("Cage1Marker") and game.Workspace.Cage1Marker:FindFirstChild("Collider")
+        local cage2 = game.Workspace:FindFirstChild("Cage2Marker") and game.Workspace.Cage2Marker:FindFirstChild("Collider")
+        local castleTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("CastleTrigger")
+        local cannonTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("CannonTrigger")
+        local cannonTextTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("CannonTextTrigger")
+        local room1Trigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Room1Trigger")
+        local room2Trigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Room2Trigger")
+        local room3Trigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Room3Trigger")
+        local room4Trigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Room4Trigger")
+        local treasureMarkerCollider = game.Workspace:FindFirstChild("TreasureMarker") and game.Workspace:FindFirstChild("TreasureMarker") and game.Workspace.TreasureMarker:FindFirstChild("Collider")
+        local wallsFinalTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("WallsFinalTrigger")
+        local wallsTrigger = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("WallsTrigger")
+        local wallsSearchArea = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("WallsSearchArea")
+        local gate1Collider = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Gates") and game.Workspace.MissionObjects.Gates:FindFirstChild("Gate1") and game.Workspace.MissionObjects.Gates.Gate1:FindFirstChild("Collider")
+        local gate2Collider = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Gates") and game.Workspace.MissionObjects.Gates:FindFirstChild("Gate2") and game.Workspace.MissionObjects.Gates.Gate2:FindFirstChild("Collider")
+        local gate3Collider = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Gates") and game.Workspace.MissionObjects.Gates:FindFirstChild("Gate3") and game.Workspace.MissionObjects.Gates.Gate3:FindFirstChild("Collider")
+        local gate4Collider = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Gates") and game.Workspace.MissionObjects.Gates:FindFirstChild("Gate4") and game.Workspace.MissionObjects.Gates.Gate4:FindFirstChild("Collider")
+        local gate5Collider = game.Workspace:FindFirstChild("MissionObjects") and game.Workspace.MissionObjects:FindFirstChild("Gates") and game.Workspace.MissionObjects.Gates:FindFirstChild("Gate5") and game.Workspace.MissionObjects.Gates.Gate5:FindFirstChild("Collider")
+        
+        -- Update the positions of objects if they exist
+        if missionStartCollider then
+            missionStartCollider.CFrame = hrp.CFrame
+            missionStartCollider.CanCollide = false
+        end
+        if caveTrigger then
+            caveTrigger.CFrame = hrp.CFrame
+        end
+        if cabbage1 then
+            cabbage1.CFrame = hrp.CFrame
+        end
+        if cabbage2 then
+            cabbage2.CFrame = hrp.CFrame
+        end
+        if bridgeTrigger then
+            bridgeTrigger.CFrame = hrp.CFrame
+        end
+        if bossIntroTrigger then
+            bossIntroTrigger.CFrame = hrp.CFrame
+        end
+        if townTalkPart then
+            townTalkPart.CFrame = hrp.CFrame
+        end
+        if boulderTrigger then
+            boulderTrigger.CFrame = hrp.CFrame
+        end
+        if boulderStopTrigger then
+            boulderStopTrigger.CFrame = hrp.CFrame
+        end
+        if cage1 then
+            cage1.CFrame = hrp.CFrame
+        end
+        if cage2 then
+            cage2.CFrame = hrp.CFrame
+        end
+        if castleTrigger then
+            castleTrigger.CFrame = hrp.CFrame
+        end
+        if cannonTrigger then
+            cannonTrigger.CFrame = hrp.CFrame
+        end
+        if cannonTextTrigger then
+            cannonTextTrigger.CFrame = hrp.CFrame
+        end
+        if room1Trigger then
+            room1Trigger.CFrame = hrp.CFrame
+        end
+        if room2Trigger then
+            room2Trigger.CFrame = hrp.CFrame
+        end
+        if room3Trigger then
+            room3Trigger.CFrame = hrp.CFrame
+        end
+        if room4Trigger then
+            room4Trigger.CFrame = hrp.CFrame
+        end
+        if treasureMarkerCollider then
+            treasureMarkerCollider.CFrame = hrp.CFrame
+        end
+        if wallsFinalTrigger then
+            wallsFinalTrigger.CFrame = hrp.CFrame
+        end
+        if wallsTrigger then
+            wallsTrigger.CFrame = hrp.CFrame
+        end
+        if wallsSearchArea then
+            wallsSearchArea.CFrame = hrp.CFrame
+        end
+        if gate1Collider then
+            gate1Collider.CFrame = hrp.CFrame
+        end
+        if gate2Collider then
+            gate2Collider.CFrame = hrp.CFrame
+        end
+        if gate3Collider then
+            gate3Collider.CFrame = hrp.CFrame
+        end
+        if gate4Collider then
+            gate4Collider.CFrame = hrp.CFrame
+        end
+        if gate5Collider then
+            gate5Collider.CFrame = hrp.CFrame
+        end
