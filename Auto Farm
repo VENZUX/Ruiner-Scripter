@@ -1,0 +1,74 @@
+-- Function to get a position on a circle around a point, while keeping a height offset
+local function getCirclePosition(center, radius, angle, height)
+    local x = center.X + radius * math.cos(angle)
+    local y = center.Y + height
+    local z = center.Z + radius * math.sin(angle)
+    return Vector3.new(x, y, z)
+end
+
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+
+-- AntiFall part
+local part = Instance.new("Part")
+part.Size = Vector3.new(10, 1, 10)
+part.Anchored = true
+part.BrickColor = BrickColor.new("Green")
+part.Position = Vector3.new(10, 3, -5)
+part.Name = "AntiFall"
+part.Material = Enum.Material.ForceField
+
+local offset = Vector3.new(0, -4.5, 0)
+
+local function updatePosition()
+    local player = Players.LocalPlayer
+    if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        local hrp = player.Character.HumanoidRootPart
+        part.Position = hrp.Position + offset
+        part.CFrame = CFrame.new(part.Position, part.Position + hrp.CFrame.LookVector)
+    end
+end
+
+part.Parent = game.Players.LocalPlayer.Character
+RunService.RenderStepped:Connect(updatePosition)
+
+RunService.Heartbeat:Connect(function()
+    local humanoidRootPart = Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if humanoidRootPart then
+        local closestDistance = math.huge
+        local closestCollider = nil
+        
+        -- Find the closest live mob
+        for _, mobModel in ipairs(Workspace.Mobs:GetChildren()) do
+            local collider = mobModel:FindFirstChild("Collider")
+            if collider then
+                local health = mobModel:FindFirstChild("HealthProperties") and mobModel.HealthProperties.Health
+                if health and health.Value > 0 then
+                    local distance = (collider.Position - humanoidRootPart.Position).magnitude
+                    if distance < closestDistance then
+                        closestDistance = distance
+                        closestCollider = collider
+                    end
+                end
+            end
+        end
+        
+        -- If there's a live mob
+        if closestCollider then
+            -- Calculate the radius, height offset, and angles for the circular motion
+            local radius = 35
+            local heightOffset = 35
+            local angle = tick() % (10 * math.pi)
+            
+            -- Calculate the target position on the circle
+            local targetPosition = getCirclePosition(closestCollider.Position, radius, angle, heightOffset)
+            
+            -- Tweening
+            local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+            local tween = TweenService:Create(humanoidRootPart, tweenInfo, {CFrame = CFrame.new(targetPosition)})
+            tween:Play()
+        end
+    end
+end)
